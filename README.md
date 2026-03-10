@@ -1,49 +1,88 @@
-# Inventario App - Curso Fundamentos de .NET
+# Sistema de Gestión de Inventario
 
-Este repositorio contiene el código fuente de la aplicación **InventarioApp**, organizado por módulos del curso.
+Proyecto del curso **Fundamentos de .NET** - Platzi
 
-## Estructura del repositorio
+## Módulo 5: Archivos y Procesamiento (VERSIÓN FINAL)
 
-Cada módulo del curso tiene su propia branch:
+### Requisitos
+- .NET 9 SDK
 
-| Branch | Módulo | Descripción |
-|--------|--------|-------------|
-| `modulo-1` | Módulo 1 | Fundamentos iniciales |
-| `modulo-2` | Módulo 2 | Evolución del proyecto |
-| `modulo-3` | Módulo 3 | Nuevas funcionalidades |
-| `modulo-4` | Módulo 4 | Características avanzadas |
-| `modulo-5` | Módulo 5 | Versión final del proyecto |
-
-## Cómo descargar un módulo específico
-
-### Opción 1: Clonar una branch específica
-
+### Cómo ejecutar
 ```bash
-git clone -b modulo-1 https://github.com/MancoMartinez/inventario-app-releases.git
+dotnet run
 ```
 
-Reemplaza `modulo-1` por la branch del módulo que desees.
+### Archivos generados
+- `inventario.json` - Base de datos (persistencia automática)
+- `inventario_backup_*.json` - Backups automáticos
 
-### Opción 2: Cambiar entre módulos (si ya clonaste el repo)
-
-```bash
-git checkout modulo-1
+### Estructura del Proyecto (Final)
+```
+InventarioApp/
+├── Program.cs
+├── InventarioApp.csproj
+├── .gitignore
+├── README.md
+└── src/
+    ├── Models/
+    │   ├── CategoriaProducto.cs
+    │   ├── EstadoProducto.cs
+    │   ├── Producto.cs
+    │   └── Proveedor.cs
+    ├── Factories/
+    │   └── ProductoFactory.cs
+    ├── Repositories/
+    │   ├── IProductoRepository.cs
+    │   └── InMemoryProductoRepository.cs
+    ├── Services/
+    │   └── InventarioService.cs
+    └── Infrastructure/
+        ├── FileManager.cs
+        ├── JsonInventarioStorage.cs
+        └── GeneradorReportes.cs
 ```
 
-## Cómo comparar módulos
-
-Para ver las diferencias entre dos módulos, usa:
-
-```bash
-git diff modulo-1..modulo-2
-```
-
-Esto te mostrará todos los cambios introducidos entre el Módulo 1 y el Módulo 2.
-
-### Comparar en GitHub
-
-También puedes comparar directamente en GitHub visitando:
+### Arquitectura
 
 ```
-https://github.com/MancoMartinez/inventario-app-releases/compare/modulo-1...modulo-2
+┌─────────────────────────────────────────────────────────────────┐
+│                        Program.cs                               │
+│                      (UI de Consola)                            │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+┌───────────────────────────▼─────────────────────────────────────┐
+│                   InventarioService                             │
+│              (Orquestación + Persistencia)                      │
+└──────┬──────────────────┬───────────────────┬───────────────────┘
+       │                  │                   │
+┌──────▼──────┐   ┌───────▼───────┐   ┌───────▼───────┐
+│ Repository  │   │    Factory    │   │Infrastructure │
+│ (Memoria)   │   │  (Creación)   │   │   (I/O)       │
+└─────────────┘   └───────────────┘   └───────────────┘
 ```
+
+### Conceptos del Módulo 5
+- FileManager: abstracción de operaciones de archivo
+- JsonInventarioStorage: serialización/deserialización JSON
+- GeneradorReportes: reportes con StringBuilder y LINQ
+- InventarioService: patrón Facade con persistencia automática
+- System.Text.Json: serializador nativo de .NET
+
+### Checklist de Progreso
+- [x] Módulo 1: El Ecosistema .NET
+- [x] Módulo 2: Entradas, Salidas y Tipos
+- [x] Módulo 3: Funciones y Modelado de Dominio
+- [x] Módulo 4: Colecciones y LINQ
+- [x] Módulo 5: Archivos y Procesamiento
+
+---
+
+## 🎓 CURSO COMPLETADO
+
+Este proyecto demuestra comprensión estructural de .NET:
+- Decisiones de diseño justificadas (class vs record, List vs Dictionary)
+- Patrones aplicados donde agregan valor (Repository, Factory, Facade)
+- Código mantenible y extensible
+
+### Autor
+Sebastian Martinez
