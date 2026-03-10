@@ -1,49 +1,63 @@
-# Inventario App - Curso Fundamentos de .NET
+# Sistema de Gestión de Inventario
 
-Este repositorio contiene el código fuente de la aplicación **InventarioApp**, organizado por módulos del curso.
+Proyecto del curso **Fundamentos de .NET** - Platzi
 
-## Estructura del repositorio
+## Módulo 4: Colecciones y LINQ
 
-Cada módulo del curso tiene su propia branch:
+### Requisitos
+- .NET 9 SDK
 
-| Branch | Módulo | Descripción |
-|--------|--------|-------------|
-| `modulo-1` | Módulo 1 | Fundamentos iniciales |
-| `modulo-2` | Módulo 2 | Evolución del proyecto |
-| `modulo-3` | Módulo 3 | Nuevas funcionalidades |
-| `modulo-4` | Módulo 4 | Características avanzadas |
-| `modulo-5` | Módulo 5 | Versión final del proyecto |
-
-## Cómo descargar un módulo específico
-
-### Opción 1: Clonar una branch específica
-
+### Cómo ejecutar
 ```bash
-git clone -b modulo-1 https://github.com/MancoMartinez/inventario-app-releases.git
+dotnet run
 ```
 
-Reemplaza `modulo-1` por la branch del módulo que desees.
-
-### Opción 2: Cambiar entre módulos (si ya clonaste el repo)
-
-```bash
-git checkout modulo-1
+### Estructura del Proyecto
+```
+InventarioApp/
+├── Program.cs
+├── InventarioApp.csproj
+├── .gitignore
+├── README.md
+└── src/
+    ├── Models/
+    │   ├── CategoriaProducto.cs
+    │   ├── EstadoProducto.cs
+    │   ├── Producto.cs
+    │   └── Proveedor.cs
+    ├── Factories/
+    │   └── ProductoFactory.cs
+    └── Repositories/
+        ├── IProductoRepository.cs
+        └── InMemoryProductoRepository.cs
 ```
 
-## Cómo comparar módulos
+### Conceptos del Módulo
+- Patrón Repository (abstracción de datos)
+- Interfaces para contratos
+- LINQ básico: Where, Select, FirstOrDefault
+- LINQ avanzado: GroupBy, OrderBy, Sum, Average
+- Dictionary para acceso O(1)
 
-Para ver las diferencias entre dos módulos, usa:
+### LINQ Destacado
 
-```bash
-git diff modulo-1..modulo-2
-```
+| Método | Propósito |
+|--------|-----------|
+| `Where` | Filtrar elementos |
+| `Select` | Transformar/proyectar |
+| `OrderBy` | Ordenar |
+| `GroupBy` | Agrupar |
+| `Sum` | Sumar valores |
+| `Average` | Calcular promedio |
+| `FirstOrDefault` | Obtener primero o null |
+| `Any` | ¿Existe alguno? |
 
-Esto te mostrará todos los cambios introducidos entre el Módulo 1 y el Módulo 2.
+### Checklist de Progreso
+- [x] Módulo 1: El Ecosistema .NET
+- [x] Módulo 2: Entradas, Salidas y Tipos
+- [x] Módulo 3: Funciones y Modelado de Dominio
+- [x] Módulo 4: Colecciones y LINQ
+- [ ] Módulo 5: Archivos y Procesamiento
 
-### Comparar en GitHub
-
-También puedes comparar directamente en GitHub visitando:
-
-```
-https://github.com/MancoMartinez/inventario-app-releases/compare/modulo-1...modulo-2
-```
+### Autor
+Sebastian Martinez
