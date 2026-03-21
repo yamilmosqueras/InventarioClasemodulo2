@@ -2,7 +2,7 @@
 
 Proyecto del curso **Fundamentos de .NET** - Platzi
 
-## Módulo 2: Entradas, Salidas y Tipos
+## Módulo 3: Funciones y Modelado de Dominio
 
 ### Requisitos
 - .NET 9 SDK
@@ -10,15 +10,7 @@ Proyecto del curso **Fundamentos de .NET** - Platzi
 ### Cómo ejecutar
 ```bash
 dotnet run
-dotnet run --help
-dotnet run --version
 ```
-
-### Comandos interactivos
-- `listar` - Lista productos del inventario
-- `agregar` - Agrega un nuevo producto (Módulo 3)
-- `buscar` - Busca productos (Módulo 4)
-- `salir` - Sale del programa
 
 ### Estructura del Proyecto
 ```
@@ -28,14 +20,26 @@ InventarioApp/
 ├── .gitignore
 ├── README.md
 └── src/
-    └── Models/
-        └── .gitkeep
+    ├── Models/
+    │   ├── CategoriaProducto.cs  (enum)
+    │   ├── EstadoProducto.cs     (enum)
+    │   ├── Producto.cs           (class con validación)
+    │   └── Proveedor.cs          (record)
+    └── Factories/
+        └── ProductoFactory.cs    (creación validada)
 ```
+
+### Conceptos del Módulo
+- Métodos con firmas claras
+- Enums para estados y categorías
+- Classes vs Records
+- Factory Pattern para creación validada
+- Guard clauses en setters
 
 ### Checklist de Progreso
 - [x] Módulo 1: El Ecosistema .NET
 - [x] Módulo 2: Entradas, Salidas y Tipos
-- [ ] Módulo 3: Funciones y Modelado de Dominio
+- [x] Módulo 3: Funciones y Modelado de Dominio
 - [ ] Módulo 4: Colecciones y LINQ
 - [ ] Módulo 5: Archivos y Procesamiento
 
