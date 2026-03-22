@@ -25,4 +25,8 @@ public interface IProductoRepository
 
     /// <summary>Cantidad total de productos.</summary>
     int Cantidad { get; }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e64d1f36112c05ee84c89aa651c47c2ebaa51fdf

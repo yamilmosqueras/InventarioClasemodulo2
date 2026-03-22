@@ -1,97 +1,62 @@
-// SISTEMA DE INVENTARIO - Módulo 3 Completo
-using System.Reflection;
+// SISTEMA DE INVENTARIO - Módulo 4 Completo
 using InventarioApp.Models;
 using InventarioApp.Factories;
+using InventarioApp.Repositories;
 
-var assembly = Assembly.GetExecutingAssembly();
-var version = assembly.GetName().Version;
+var repositorio = new InMemoryProductoRepository();
+bool activo = true;
 
-// Lista temporal de productos (se reemplazará por Repository en Módulo 4)
-var productos = new List<Producto>();
-
-MostrarBanner();
-Console.WriteLine("Comandos: listar, agregar, buscar, salir");
+Console.WriteLine("╔══════════════════════════════════════╗");
+Console.WriteLine("║   SISTEMA DE GESTIÓN DE INVENTARIO   ║");
+Console.WriteLine("║        Módulo 4: LINQ y Patrones     ║");
+Console.WriteLine("╚══════════════════════════════════════╝");
 Console.WriteLine();
 
-bool continuar = true;
-while (continuar)
+while (activo)
 {
-    var comando = LeerEntrada("inventario> ");
-    continuar = ProcesarComando(comando);
-}
+    MostrarMenu();
+    string opcion = Console.ReadLine() ?? "";
 
-Environment.Exit(0);
+    switch (opcion)
+    {
+        case "1": AgregarProducto(); break;
+        case "2": ListarProductos(); break;
+        case "3": BuscarPorId(); break;
+        case "4": EliminarProducto(); break;
+        case "5": BuscarPorCategoria(); break;
+        case "6": MostrarEstadisticas(); break;
+        case "7": MostrarStockBajo(); break;
+        case "8": ExportarCsv(); break;
+        case "9":
+            activo = false;
+            Console.WriteLine("\n¡Hasta luego!");
+            break;
+        default:
+            Console.WriteLine("\n⚠ Opción no válida.");
+            break;
+    }
+}
 
 // ══════════════════════════════════════════════════════════════════
 // MÉTODOS LOCALES
 // ══════════════════════════════════════════════════════════════════
 
-bool ProcesarComando(string comando)
+void MostrarMenu()
 {
-    switch (comando)
-    {
-        case "salir":
-        case "exit":
-        case "q":
-            Console.WriteLine("¡Hasta luego!");
-            return false;
-
-        case "listar":
-            ListarProductos();
-            break;
-
-        case "agregar":
-            AgregarProducto();
-            break;
-
-        case "buscar":
-            BuscarProducto();
-            break;
-
-        case "":
-            break;
-
-        default:
-            Console.WriteLine($"❌ Comando '{comando}' no reconocido");
-            Console.WriteLine("   Use: listar, agregar, buscar, salir");
-            break;
-    }
-
-    Console.WriteLine();
-    return true;
-}
-
-void MostrarBanner()
-{
-    Console.WriteLine("╔══════════════════════════════════════╗");
-    Console.WriteLine("║   SISTEMA DE GESTIÓN DE INVENTARIO   ║");
+    Console.WriteLine("\n╔══════════════════════════════════════╗");
+    Console.WriteLine("║           MENÚ PRINCIPAL             ║");
+    Console.WriteLine("╠══════════════════════════════════════╣");
+    Console.WriteLine("║  1. Agregar producto                 ║");
+    Console.WriteLine("║  2. Listar productos                 ║");
+    Console.WriteLine("║  3. Buscar por ID                    ║");
+    Console.WriteLine("║  4. Eliminar producto                ║");
+    Console.WriteLine("║  5. Buscar por categoría             ║");
+    Console.WriteLine("║  6. Ver estadísticas                 ║");
+    Console.WriteLine("║  7. Ver stock bajo                   ║");
+    Console.WriteLine("║  8. Exportar CSV                     ║");
+    Console.WriteLine("║  9. Salir                            ║");
     Console.WriteLine("╚══════════════════════════════════════╝");
-    Console.WriteLine();
-    Console.WriteLine($"Versión: {version}");
-    Console.WriteLine($".NET: {Environment.Version}");
-    Console.WriteLine();
-}
-
-string LeerEntrada(string prompt)
-{
-    Console.Write(prompt);
-    return Console.ReadLine()?.Trim().ToLower() ?? "";
-}
-
-void ListarProductos()
-{
-    if (productos.Count == 0)
-    {
-        Console.WriteLine("📦 No hay productos en el inventario.");
-        return;
-    }
-
-    Console.WriteLine("\n=== PRODUCTOS ===");
-    foreach (var p in productos)
-    {
-        Console.WriteLine($"ID: {p.Id} | {p.Nombre} | ${p.Precio:F2} | Cant: {p.Cantidad} | Total: ${p.ValorTotal:F2}");
-    }
-    Console.WriteLine($"\nTotal: {productos.Count} producto(s)");
+    Console.Write("\nSelecciona: ");
 }
 
 void AgregarProducto()
@@ -127,8 +92,8 @@ void AgregarProducto()
     try
     {
         var producto = ProductoFactory.Crear(nombre, precio, cantidad, categoria);
-        productos.Add(producto);
-        Console.WriteLine($"\n✓ Producto '{producto.Nombre}' agregado con ID {producto.Id}");
+        repositorio.Agregar(producto);
+        Console.WriteLine($"\n✓ Producto agregado con ID {producto.Id}");
     }
     catch (ArgumentException ex)
     {
@@ -136,26 +101,147 @@ void AgregarProducto()
     }
 }
 
-void BuscarProducto()
+void ListarProductos()
 {
-    Console.WriteLine("🔍 Función buscar (se implementará completamente en Módulo 4)");
-    
-    Console.Write("\nBuscar por nombre: ");
-    string termino = Console.ReadLine() ?? "";
+    var productos = repositorio.ObtenerTodos().ToList();
 
-    var encontrados = productos
-        .Where(p => p.Nombre.Contains(termino, StringComparison.OrdinalIgnoreCase))
-        .ToList();
-
-    if (encontrados.Count == 0)
+    if (productos.Count == 0)
     {
-        Console.WriteLine($"No se encontraron productos con '{termino}'");
+        Console.WriteLine("\nNo hay productos registrados.");
         return;
     }
 
-    Console.WriteLine($"\n=== {encontrados.Count} resultado(s) ===");
-    foreach (var p in encontrados)
+    Console.WriteLine("\n=== PRODUCTOS ===");
+    foreach (var p in productos)
     {
-        Console.WriteLine($"ID: {p.Id} | {p.Nombre} | ${p.Precio:F2}");
+        Console.WriteLine($"ID: {p.Id} | {p.Nombre} | ${p.Precio:F2} | Cant: {p.Cantidad} | Total: ${p.ValorTotal:F2} | {p.Categoria}");
     }
+    Console.WriteLine($"\nTotal: {productos.Count} producto(s)");
+}
+
+void BuscarPorId()
+{
+    Console.Write("\nID: ");
+    if (!int.TryParse(Console.ReadLine(), out int id))
+    {
+        Console.WriteLine("⚠ ID inválido.");
+        return;
+    }
+
+    var producto = repositorio.ObtenerPorId(id);
+
+    if (producto == null)
+    {
+        Console.WriteLine($"⚠ No existe producto con ID {id}");
+        return;
+    }
+
+    Console.WriteLine($"\n--- Producto #{producto.Id} ---");
+    Console.WriteLine($"Nombre: {producto.Nombre}");
+    Console.WriteLine($"Precio: ${producto.Precio:F2}");
+    Console.WriteLine($"Cantidad: {producto.Cantidad}");
+    Console.WriteLine($"Valor Total: ${producto.ValorTotal:F2}");
+    Console.WriteLine($"Categoría: {producto.Categoria}");
+    Console.WriteLine($"Estado: {producto.Estado}");
+}
+
+void EliminarProducto()
+{
+    Console.Write("\nID a eliminar: ");
+    if (!int.TryParse(Console.ReadLine(), out int id))
+    {
+        Console.WriteLine("⚠ ID inválido.");
+        return;
+    }
+
+    var producto = repositorio.ObtenerPorId(id);
+    if (producto == null)
+    {
+        Console.WriteLine($"⚠ No existe producto con ID {id}");
+        return;
+    }
+
+    Console.Write($"¿Eliminar '{producto.Nombre}'? (s/n): ");
+    if (Console.ReadLine()?.ToLower() == "s")
+    {
+        repositorio.Eliminar(id);
+        Console.WriteLine("✓ Producto eliminado.");
+    }
+}
+
+void BuscarPorCategoria()
+{
+    Console.WriteLine("\nCategorías: Electronica, Ropa, Alimentos, Hogar, Deportes, Libros, Otros");
+    Console.Write("Categoría: ");
+    string catStr = Console.ReadLine() ?? "";
+
+    if (!Enum.TryParse<CategoriaProducto>(catStr, true, out var categoria))
+    {
+        Console.WriteLine("⚠ Categoría inválida.");
+        return;
+    }
+
+    var productos = repositorio.BuscarPorCategoria(categoria).ToList();
+
+    if (productos.Count == 0)
+    {
+        Console.WriteLine($"\nNo hay productos en {categoria}.");
+        return;
+    }
+
+    Console.WriteLine($"\n=== PRODUCTOS EN {categoria.ToString().ToUpper()} ===");
+    foreach (var p in productos)
+    {
+        Console.WriteLine($"ID: {p.Id} | {p.Nombre} | ${p.Precio:F2} | Cant: {p.Cantidad}");
+    }
+}
+
+void MostrarEstadisticas()
+{
+    Console.WriteLine("\n=== ESTADÍSTICAS ===");
+    Console.WriteLine($"Productos totales: {repositorio.Cantidad}");
+    Console.WriteLine($"Valor total inventario: ${repositorio.ObtenerValorTotalInventario():F2}");
+    Console.WriteLine($"Precio promedio: ${repositorio.ObtenerPrecioPromedio():F2}");
+
+    var masCaro = repositorio.ObtenerProductoMasCaro();
+    if (masCaro != null)
+    {
+        Console.WriteLine($"Más caro: {masCaro.Nombre} (${masCaro.Precio:F2})");
+    }
+
+    Console.WriteLine("\nPor categoría:");
+    foreach (var kvp in repositorio.ContarPorCategoria())
+    {
+        Console.WriteLine($"  {kvp.Key}: {kvp.Value} producto(s)");
+    }
+}
+
+void MostrarStockBajo()
+{
+    var stockBajo = repositorio.ObtenerStockBajo(5).ToList();
+
+    if (stockBajo.Count == 0)
+    {
+        Console.WriteLine("\n✓ No hay productos con stock bajo.");
+        return;
+    }
+
+    Console.WriteLine("\n=== ALERTA: STOCK BAJO (< 5) ===");
+    foreach (var p in stockBajo)
+    {
+        Console.WriteLine($"⚠ {p.Nombre} | Stock: {p.Cantidad} | ${p.Precio:F2}");
+    }
+}
+
+void ExportarCsv()
+{
+    Console.WriteLine("\n=== EXPORTAR CSV ===");
+    Console.WriteLine("Id,Nombre,Precio,Cantidad,Categoria,ValorTotal");
+
+    foreach (var p in repositorio.ObtenerTodos().OrderBy(p => p.Id))
+    {
+        Console.WriteLine($"{p.Id},{p.Nombre},{p.Precio:F2},{p.Cantidad},{p.Categoria},{p.ValorTotal:F2}");
+    }
+
+    Console.WriteLine("\n(En módulo 5: guardaremos esto en archivo)");
 }
