@@ -1,0 +1,15 @@
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\bin\Debug\net9.0\InventarioApp.exe
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\bin\Debug\net9.0\InventarioApp.deps.json
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\bin\Debug\net9.0\InventarioApp.runtimeconfig.json
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\bin\Debug\net9.0\InventarioApp.dll
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\bin\Debug\net9.0\InventarioApp.pdb
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.AssemblyInfoInputs.cache
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.AssemblyInfo.cs
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.csproj.CoreCompileInputs.cache
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.sourcelink.json
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.dll
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\refint\InventarioApp.dll
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.pdb
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\InventarioApp.genruntimeconfig.cache
+C:\Users\yamil.mosquera\OneDrive - MVM Ingenieria de Software\Escritorio\ESTUDIO FUNDAMENTOS .NET\InventarioClasemodulo2\obj\Debug\net9.0\ref\InventarioApp.dll
