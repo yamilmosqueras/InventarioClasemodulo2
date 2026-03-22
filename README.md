@@ -2,7 +2,7 @@
 
 Proyecto del curso **Fundamentos de .NET** - Platzi
 
-## Módulo 3: Funciones y Modelado de Dominio
+## Módulo 4: Colecciones y LINQ
 
 ### Requisitos
 - .NET 9 SDK
@@ -21,26 +21,42 @@ InventarioApp/
 ├── README.md
 └── src/
     ├── Models/
-    │   ├── CategoriaProducto.cs  (enum)
-    │   ├── EstadoProducto.cs     (enum)
-    │   ├── Producto.cs           (class con validación)
-    │   └── Proveedor.cs          (record)
-    └── Factories/
-        └── ProductoFactory.cs    (creación validada)
+    │   ├── CategoriaProducto.cs
+    │   ├── EstadoProducto.cs
+    │   ├── Producto.cs
+    │   └── Proveedor.cs
+    ├── Factories/
+    │   └── ProductoFactory.cs
+    └── Repositories/
+        ├── IProductoRepository.cs
+        └── InMemoryProductoRepository.cs
 ```
 
 ### Conceptos del Módulo
-- Métodos con firmas claras
-- Enums para estados y categorías
-- Classes vs Records
-- Factory Pattern para creación validada
-- Guard clauses en setters
+- Patrón Repository (abstracción de datos)
+- Interfaces para contratos
+- LINQ básico: Where, Select, FirstOrDefault
+- LINQ avanzado: GroupBy, OrderBy, Sum, Average
+- Dictionary para acceso O(1)
+
+### LINQ Destacado
+
+| Método | Propósito |
+|--------|-----------|
+| `Where` | Filtrar elementos |
+| `Select` | Transformar/proyectar |
+| `OrderBy` | Ordenar |
+| `GroupBy` | Agrupar |
+| `Sum` | Sumar valores |
+| `Average` | Calcular promedio |
+| `FirstOrDefault` | Obtener primero o null |
+| `Any` | ¿Existe alguno? |
 
 ### Checklist de Progreso
 - [x] Módulo 1: El Ecosistema .NET
 - [x] Módulo 2: Entradas, Salidas y Tipos
 - [x] Módulo 3: Funciones y Modelado de Dominio
-- [ ] Módulo 4: Colecciones y LINQ
+- [x] Módulo 4: Colecciones y LINQ
 - [ ] Módulo 5: Archivos y Procesamiento
 
 ### Autor
